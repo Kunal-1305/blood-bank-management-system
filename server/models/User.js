@@ -25,20 +25,18 @@ const userSchema = new mongoose.Schema(
 
     phone: {
       type: String,
+      required: true,
     },
 
     location: {
       type: String,
+      required: true,
     },
 
     role: {
       type: String,
-      default: "donor",
-    },
-
-    available: {
-      type: Boolean,
-      default: true,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
   {
@@ -46,4 +44,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model(
+  "User",
+  userSchema
+);
