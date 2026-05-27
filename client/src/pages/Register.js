@@ -28,20 +28,26 @@ function Register() {
         formData
       );
 
-      alert(
-  error.response?.data?.message ||
-    error.message
-);
+      alert(response.data.message);
 
       console.log(response.data);
-    } catch (error) {
-  console.log(error);
 
-  alert(
-    error.response?.data?.message ||
-      error.message
-  );
-}
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        bloodGroup: "",
+        phone: "",
+        location: "",
+      });
+    } catch (error) {
+      console.log(error);
+
+      alert(
+        error.response?.data?.message ||
+          error.message
+      );
+    }
   };
 
   return (
@@ -57,6 +63,7 @@ function Register() {
             name="name"
             placeholder="Enter Name"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.name}
             onChange={handleChange}
           />
 
@@ -65,6 +72,7 @@ function Register() {
             name="email"
             placeholder="Enter Email"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.email}
             onChange={handleChange}
           />
 
@@ -73,6 +81,7 @@ function Register() {
             name="password"
             placeholder="Enter Password"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.password}
             onChange={handleChange}
           />
 
@@ -81,6 +90,7 @@ function Register() {
             name="bloodGroup"
             placeholder="Blood Group"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.bloodGroup}
             onChange={handleChange}
           />
 
@@ -89,6 +99,7 @@ function Register() {
             name="phone"
             placeholder="Phone Number"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.phone}
             onChange={handleChange}
           />
 
@@ -97,6 +108,7 @@ function Register() {
             name="location"
             placeholder="Location"
             className="w-full border p-2 mb-4 rounded"
+            value={formData.location}
             onChange={handleChange}
           />
 
