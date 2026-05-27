@@ -28,7 +28,10 @@ function Register() {
         formData
       );
 
-      alert(response.data.message);
+      alert(
+  error.response?.data?.message ||
+    error.message
+);
 
       console.log(response.data);
     } catch (error) {
