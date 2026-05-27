@@ -30,7 +30,7 @@ const registerUser = async (req, res) => {
     const hashedPassword =
       await bcrypt.hash(password, salt);
 
-    // create ADMIN user temporarily
+    // create DONOR user
     const newUser = new User({
       name,
       email,
@@ -38,14 +38,14 @@ const registerUser = async (req, res) => {
       bloodGroup,
       phone,
       location,
-      role: "admin",
+      role: "donor",
     });
 
     await newUser.save();
 
     res.status(201).json({
       message:
-        "Admin Registered Successfully",
+        "User Registered Successfully",
     });
   } catch (error) {
     console.log(error);
