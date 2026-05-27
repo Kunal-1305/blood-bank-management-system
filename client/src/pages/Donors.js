@@ -22,8 +22,9 @@ function Donors() {
   });
 
   useEffect(() => {
-    fetchDonors();
-  }, [bloodGroup]);
+  fetchDonors();
+
+}, [bloodGroup]);
 
   const fetchDonors = async () => {
     try {
