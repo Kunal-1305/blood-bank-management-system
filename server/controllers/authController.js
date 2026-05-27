@@ -5,11 +5,18 @@ const jwt = require("jsonwebtoken");
 // Register User
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, bloodGroup, phone, location } =
-      req.body;
+    const {
+      name,
+      email,
+      password,
+      bloodGroup,
+      phone,
+      location,
+    } = req.body;
 
     // check existing user
-    const existingUser = await User.findOne({ email });
+    const existingUser =
+      await User.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({
@@ -20,27 +27,29 @@ const registerUser = async (req, res) => {
     // hash password
     const salt = await bcrypt.genSalt(10);
 
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword =
+      await bcrypt.hash(password, salt);
 
-    // create user
+    // create ADMIN user temporarily
     const newUser = new User({
-  name,
-  email,
-  password: hashedPassword,
-  bloodGroup,
-  phone,
-  location,
-  role: "donor",
-});
+      name,
+      email,
+      password: hashedPassword,
+      bloodGroup,
+      phone,
+      location,
+      role: "admin",
+    });
 
     await newUser.save();
 
     res.status(201).json({
-      message: "User Registered Successfully",
+      message:
+        "Admin Registered Successfully",
     });
   } catch (error) {
     console.log(error);
-    
+
     res.status(500).json({
       message: error.message,
     });
@@ -53,7 +62,9 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     // check user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      email,
+    });
 
     if (!user) {
       return res.status(400).json({
@@ -62,7 +73,11 @@ const loginUser = async (req, res) => {
     }
 
     // compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch =
+      await bcrypt.compare(
+        password,
+        user.password
+      );
 
     if (!isMatch) {
       return res.status(400).json({
@@ -85,12 +100,13 @@ const loginUser = async (req, res) => {
       message: "Login Successful",
       token,
       user: {
-  id: user._id,
-  name: user.name,
-  email: user.email,
-  bloodGroup: user.bloodGroup,
-  role: user.role,
-},
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        bloodGroup:
+          user.bloodGroup,
+        role: user.role,
+      },
     });
   } catch (error) {
     res.status(500).json({
