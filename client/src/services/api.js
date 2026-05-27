@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://blood-bank-management-system-rjfy.onrender.com/api",
 });
 
 // attach token automatically
