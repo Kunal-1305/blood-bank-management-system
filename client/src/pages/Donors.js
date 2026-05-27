@@ -8,7 +8,6 @@ function Donors() {
   const user = JSON.parse(
     localStorage.getItem("user")
   );
-  
 
   const [bloodGroup, setBloodGroup] =
     useState("");
@@ -20,11 +19,6 @@ function Donors() {
     phone: "",
     location: "",
   });
-
-  useEffect(() => {
-  fetchDonors();
-
-}, [bloodGroup]);
 
   const fetchDonors = async () => {
     try {
@@ -41,6 +35,12 @@ function Donors() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchDonors();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bloodGroup]);
 
   const handleChange = (e) => {
     setFormData({
